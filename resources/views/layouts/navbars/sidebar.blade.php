@@ -4,7 +4,7 @@
 -->
   <div class="logo">
     <a href="{{ url('/') }}" class="logo-mini">
-        <img src="{{ asset('assets/img/clan/logo.png') }}" alt="Clã 542" style="height:40px; border-radius:50%;">
+        <img src="{{ asset('assets/img/Logo_cla.png') }}" alt="Clã 542" style="height:40px; border-radius:50%;">
     </a>
     <a class="simple-text logo-normal">
       {{ __('Clã 542') }}

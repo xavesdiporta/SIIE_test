@@ -580,10 +580,10 @@ fieldset[disabled] .navbar .navbar-nav>a.btn.active {
 .show>.btn-primary.dropdown-toggle,
 .show>.btn-primary.dropdown-toggle:focus,
 .show>.btn-primary.dropdown-toggle:hover {
-    background-color: #fa7a50;
+    background-color: #ff0000;
     color: #FFFFFF;
     box-shadow: none;
-    border-color: #fa7a50;
+    border-color: #ff2424;
 }
 
 .btn-primary:not([data-action]):not([class*="btn-outline-"]):hover {
@@ -1950,7 +1950,7 @@ p.description {
 .text-primary,
 a.text-primary:focus,
 a.text-primary:hover {
-    color: #f96332 !important;
+    color: #ff0000 !important;
 }
 
 .text-info,

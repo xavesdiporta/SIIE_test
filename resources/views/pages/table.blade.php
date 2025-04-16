@@ -1,10 +1,4 @@
-@extends('layouts.app', [
-    'namePage' => 'Table List',
-    'class' => 'sidebar-mini',
-    'activePage' => 'table',
-  ])
 
-@section('content')
   <div class="panel-header panel-header-sm">
   </div>
   <div class="content">

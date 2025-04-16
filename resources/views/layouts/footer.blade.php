@@ -27,10 +27,8 @@
       &copy;
       <script>
         document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
-      </script>, {{__(" Designed by")}}
-      <a href="https://www.invisionapp.com" target="_blank">{{__(" Invision")}}</a>{{__(" . Coded by")}}
-      <a href="https://www.creative-tim.com" target="_blank">{{__(" Creative Tim ")}}</a>&
-      <a href="https://www.updivision.com" target="_blank">{{__(" Updivision")}}</a>
+      </script>, {{__(" Designed and Coded by")}}
+      <a href="https://github.com/xavesdiporta" target="_blank">{{__(" Xavier")}}</a>
     </div>
   </div>
 </footer>

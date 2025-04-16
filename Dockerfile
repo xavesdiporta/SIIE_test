@@ -42,6 +42,9 @@ COPY . /var/www/html
 # Instala dependências PHP
 RUN composer install --no-dev --optimize-autoloader
 
+# ⚠️ Executa as migrations
+RUN php artisan migrate --force
+
 # Faz o build do Vite
 RUN npm run build
 

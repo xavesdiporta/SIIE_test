@@ -2201,7 +2201,7 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    border: 1px solid #E3E3E3;
+    border: 1px solid #0028ff;
     display: inline-block;
     position: absolute;
     left: 3px;
@@ -5789,7 +5789,7 @@ Created using IcoMoon - icomoon.io
 .login-page .card-login.card-plain .input-group-focus .input-group-prepend .input-group-text,
 .login-page .card-login.card-plain .input-group-focus .input-group-append .input-group-text {
     background-color: transparent;
-    border-color: #FFFFFF;
+    border-color: transparent;
     color: #FFFFFF;
 }
 

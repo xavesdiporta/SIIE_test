@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>
-        Log In - Clã 542
+        Clã 542
     </title>
 
     <meta name="description" content="@yield('seo.description', 'Your default description goes here')">

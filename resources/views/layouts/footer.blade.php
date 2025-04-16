@@ -28,7 +28,7 @@
       <script>
         document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
       </script>, {{__(" Designed and Coded by")}}
-      <a href="https://github.com/xavesdiporta" target="_blank">{{__(" Xavier")}}</a>
+      <a href="https://github.com/xavesdiporta" target="_blank" class="text-red-700">{{__(" Xavier")}}</a>
     </div>
   </div>
 </footer>

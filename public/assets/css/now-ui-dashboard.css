@@ -2438,8 +2438,8 @@ a[data-toggle="collapse"][aria-expanded="true"] .caret,
 }
 
 .navbar .logo-container {
-    width: 27px;
-    height: 27px;
+    width: 35px;
+    height: 35px;
     overflow: hidden;
     margin: 0 auto;
     border-radius: 50%;

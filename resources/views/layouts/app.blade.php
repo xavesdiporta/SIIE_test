@@ -1,52 +1,117 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-  <meta charset="utf-8" />
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets') }}/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="{{ asset('assets') }}/img/favicon.png">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <!-- Extra details for Live View on GitHub Pages -->
-  <title>
-    Clã 542
-  </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- CSS Files -->
-  <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="{{ asset('assets') }}/css/now-ui-dashboard.css?v=1.3.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="{{ asset('assets') }}/demo/demo.css" rel="stylesheet" />
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Styles -->
+    @livewireStyles
+    <style>
+        [x-cloak] { display: none !important; }
+        #calendar {
+            max-width: 100%;
+            background-color: #3E2D1B;
+            padding: 1rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .fc-toolbar-title {
+            @apply text-xl font-semibold text-gray-800;
+        }
+
+        .fc-daygrid-event {
+            background-color: #776246 !important;
+            border: none;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            padding: 2px 4px;
+            color: white;
+        }
+
+        .fc-daygrid-day:hover {
+            background-color: #3E2D1B;
+        }
+    </style>
 </head>
+<body class="font-sans antialiased bg-[#FAF7F5] text-[#665039]">
+<x-banner />
 
-<body class="{{ $class ?? '' }}">
-  <div class="wrapper">
-    @auth
-      @include('layouts.page_template.auth')
-    @endauth
-    @guest
-      @include('layouts.page_template.guest')
-    @endguest
-  </div>
-  <!--   Core JS Files   -->
-  <script src="{{ asset('assets') }}/js/core/jquery.min.js"></script>
-  <script src="{{ asset('assets') }}/js/core/popper.min.js"></script>
-  <script src="{{ asset('assets') }}/js/core/bootstrap.min.js"></script>
-  <script src="{{ asset('assets') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
-  <!--  Google Maps Plugin    -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-  <!-- Chart JS -->
-  <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
-  <!--  Notifications Plugin    -->
-  <script src="{{ asset('assets') }}/js/plugins/bootstrap-notify.js"></script>
-  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{ asset('assets') }}/js/now-ui-dashboard.min.js?v=1.3.0" type="text/javascript"></script>
-  <!-- Now Ui Dashboard DEMO methods, don't include it in your project! -->
-  <script src="{{ asset('assets') }}/demo/demo.js"></script>
-  @stack('js')
+<div class="min-h-screen bg-[#FAF7F5]">
+    @include('components.navigation-menu')
+
+    <div class="flex-1 ml-64">
+        <!-- Page Heading -->
+        @if (isset($header))
+            <header class="bg-white shadow-sm rounded-2xl mx-6 mt-6">
+                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                    {{ $header }}
+                </div>
+            </header>
+        @endif
+
+        <!-- Page Content -->
+        <main class="py-6 pr-6" style="background-color: #3E2D1B;">
+            <div class="bg-[#F2ECE7] rounded-[30px] py-6 pr-6">
+                {{ $slot }}
+            </div>
+        </main>
+    </div>
+</div>
+
+
+@stack('modals')
+
+@livewireScripts
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js'></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Função para ajustar o tamanho dos inputs com margem de segurança
+        function adjustInputWidth(input) {
+            input.style.width = (input.value.length + 0.60) + 'ch';
+        }
+
+        // Ajusta todos os inputs com a classe auto-size
+        document.querySelectorAll('.auto-size').forEach(input => {
+            adjustInputWidth(input);
+
+            input.addEventListener('change', () => adjustInputWidth(input));
+            input.addEventListener('input', () => adjustInputWidth(input));
+            input.addEventListener('focus', () => adjustInputWidth(input));
+        });
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('calendar');
+
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt', // FullCalendar suporta português
+            selectable: true,
+            events: '/api/events', // Rota Laravel para retornar os eventos
+            dateClick: function(info) {
+                // Ex: Redireciona com query string para abrir o modal
+                window.location.href = "{{ route('dashboard') }}?modal=add-link&date=" + info.dateStr;
+            },
+            eventClick: function(info) {
+                alert('Evento: ' + info.event.title);
+            }
+        });
+
+        calendar.render();
+    });
+</script>
+
 </body>
-
 </html>

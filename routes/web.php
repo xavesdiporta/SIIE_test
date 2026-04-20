@@ -85,6 +85,8 @@ Route::middleware([
     Route::middleware([Subscribed::class])->group(function () {
         // Add endpoints that are only for subscribed users
     });
+
+    Route::get('/allcalendar', [DashboardController::class, 'allcalendar'])->name('allcalendar');
 });
 
 Auth::routes();
